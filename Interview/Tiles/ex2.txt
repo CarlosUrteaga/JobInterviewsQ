@@ -1,0 +1,5 @@
+Input:
+	n: 6
+	p: "01"
+
+Expected Output: 4
