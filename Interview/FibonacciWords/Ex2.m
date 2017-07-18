@@ -14,26 +14,50 @@
 
 	#import <Foundation/Foundation.h>
 
-
+int intCharlenght;
+NSMutableArray *mArray;
 NSString* FibonacciWord(int number);
+
+
 int main (int argc, const char * argv[]){
 
 	if (argc ==3){
 		NSString *strNumber = [NSString stringWithUTF8String:argv[1]];
 		NSString *strPatron = [NSString stringWithUTF8String:argv[2]];
+		mArray = [[NSMutableArray alloc]init];
+
+		[mArray addObject: @"0"];
+		[mArray addObject: @"1"];
+		intCharlenght = 2;
+
 		int intFibonaci;
 		if ([strNumber intValue] != 0)
 		{
 			intFibonaci = [strNumber intValue];
 			//printf("%i\n", [strNumber intValue]);
 			if (intFibonaci<40)
-			{
-				NSLog(@"Fibonacci: %@",FibonacciWord(intFibonaci));
-				NSString *string = FibonacciWord(intFibonaci);
-				NSError *error = NULL;
-				NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:strPatron options:NSRegularExpressionCaseInsensitive error:&error];
-				NSUInteger numberOfMatches = [regex numberOfMatchesInString:string options:0 range:NSMakeRange(0, [string length])];
-				NSLog(@"Patrones repetidos: %lu",numberOfMatches);
+			{	
+				NSString * strFibonnacci = [[NSString alloc] initWithString:FibonacciWord(intFibonaci)];
+
+				
+				
+				if ([strPatron length] < 100000 && [strFibonnacci length]>= [strPatron length])
+				{
+						//NSLog(@"Fibonacci: %@",strFibonnacci);
+
+					//printf("%s", [strFibonnacci UTF8String]);
+
+					//Exception
+					NSError *error = NULL;
+					//Regular expression
+					NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:strPatron options:NSRegularExpressionCaseInsensitive error:&error];
+					//Evaluation.
+					NSUInteger numberOfMatches = [regex numberOfMatchesInString:strFibonnacci options:0 range:NSMakeRange(0, [strFibonnacci length])];
+					NSLog(@"Patrones repetidos: %lu",numberOfMatches);
+				}else{
+					NSLog(@"Error: Fibonacci Word is less than p");
+				}
+				
 			}
 		}
 	}
@@ -46,14 +70,26 @@ int main (int argc, const char * argv[]){
 
 
 NSString* FibonacciWord(int number){
+
 		if(number ==0)
-			return @"0";
+			return [NSString stringWithFormat: @"%@", [mArray objectAtIndex:0]];
 		if (number ==1)
 		{
-			return @"1";
-		}else
-			return [NSString stringWithFormat: @"%@%@", FibonacciWord(number -1), FibonacciWord(number-2)];
-			//[FibonacciWord(number -1) + FibonacciWord(number-2);
+			return [NSString stringWithFormat: @"%@", [mArray objectAtIndex:1]];
+		}
+		else
+		if (number<[mArray count] )
+		{
+			return [NSString stringWithFormat: @"%@", [mArray objectAtIndex:number]];	
+		}else{
+
+			NSString * strFibonnacci = [NSString stringWithFormat: @"%@%@", FibonacciWord(number -1 ), FibonacciWord(number -2)];
+			
+			[mArray insertObject: strFibonnacci atIndex: number];
+			strFibonnacci =nil;
+			[strFibonnacci dealloc];
+			return [NSString stringWithFormat: @"%@", [mArray objectAtIndex:number]];	
+		}
 		
 
 	}
