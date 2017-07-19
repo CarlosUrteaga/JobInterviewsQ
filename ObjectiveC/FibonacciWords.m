@@ -46,7 +46,39 @@ int main (int argc, const char * argv[]){
 						//NSLog(@"Fibonacci: %@",strFibonnacci);
 
 					//printf("%s", [strFibonnacci UTF8String]);
+					//NSString *firstSection = [strFibonnacci substringWithRange:NSMakeRange(0,[strFibonnacci length]/4)];
+					//NSString *secondSection = [strFibonnacci substringWithRange:NSMakeRange([strFibonnacci length]/4,[strFibonnacci length]/2)];
+					//printf("%s", [strFibonnacci UTF8String]);
+					//printf("%s", [secondSection UTF8String]);
+				
+					const char *c = [strFibonnacci UTF8String];
 
+					for (int i = 0; i < [strFibonnacci length]/5; ++i)
+					{
+						printf("%c", c[i]);
+
+					}
+					for (int i = [strFibonnacci length]/5; i < [strFibonnacci length]/5; ++i)
+					{
+						printf("%c", c[i]);
+
+					}
+					for (int i = [strFibonnacci length]*2/5; i < [strFibonnacci length]/5; ++i)
+					{
+						printf("%c", c[i]);
+
+					}
+					for (int i = [strFibonnacci length]*3/5; i < [strFibonnacci length]/5; ++i)
+					{
+						printf("%c", c[i]);
+
+					}
+					for (int i = [strFibonnacci length]*4/5; i < [strFibonnacci length]/5; ++i)
+					{
+						printf("%c", c[i]);
+
+					}
+					printf("\n");
 					//Exception
 					NSError *error = NULL;
 					//Regular expression
