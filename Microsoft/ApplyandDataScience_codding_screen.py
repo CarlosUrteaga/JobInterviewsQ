@@ -3,12 +3,12 @@
 # 5 minutes of codding
 
 # how to cast a string into a int
-given the string = '12345', the string is always an integer
-def string_to_number(string):
+# given the string = '12345', the string is always an integer
+def str_to_int(string):
 	size = len(string) - 1
 	real_value= 0
 	for char in string:
-		real_value+= int(char)*10**size
+		real_value+= (char-48)*10**size
 		size-=1
 	return real_value
 # I got stucket on this
@@ -18,7 +18,7 @@ def string_to_number(string):
 # complexity of the funciton is nlog(n)
 # does this not work for floats? what do you need require to add the next code.
 # str_to_int
-def str_to_int(string):
+def str_to_dec(string):
 	real_value = 0
 	size = 1
 	for each in string:
@@ -29,8 +29,8 @@ def str_to_int(string):
 
 def string_to_float(string):
 	strings = string.split('.')
-	number = string_to_number(strings[0])
-	number += str_to_int(strings[1])
+	number = str_to_int(strings[0])
+	number += str_to_dec(strings[1])
 	return number
 
 print(string_to_float('1234.1234'))
